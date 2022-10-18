@@ -118,14 +118,14 @@ export class JourneyFtrHarness {
 
   private async onSetup() {
     await Promise.all([
-      this.setupApm(),
-      this.setupBrowserAndPage(),
       asyncForEach(this.journeyConfig.getEsArchives(), async (esArchive) => {
         await this.esArchiver.load(esArchive);
       }),
       asyncForEach(this.journeyConfig.getKbnArchives(), async (kbnArchive) => {
         await this.kibanaServer.importExport.load(kbnArchive);
       }),
+      this.setupApm(),
+      this.setupBrowserAndPage(),
     ]);
   }
 
